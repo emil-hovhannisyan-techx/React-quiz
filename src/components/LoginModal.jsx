@@ -1,20 +1,6 @@
 import React, { useState } from "react";
 import "./LoginModal.css";
-
-function generateId() {
-  return Math.random().toString(36).slice(2) + Date.now().toString(36);
-}
-
-const getUsers = () => {
-  const users = localStorage.getItem("quizUsers");
-  return users ? JSON.parse(users) : [];
-};
-
-const saveUser = (user) => {
-  const users = getUsers();
-  users.push(user);
-  localStorage.setItem("quizUsers", JSON.stringify(users));
-};
+import { generateId, getUsers, saveUser } from "../utils";
 
 const LoginModal = ({ onLogin, onClose }) => {
   const [isSignup, setIsSignup] = useState(false);
@@ -22,7 +8,6 @@ const LoginModal = ({ onLogin, onClose }) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [suggestions, setSuggestions] = useState([]);
-
   React.useEffect(() => {
     setSuggestions(getUsers().map((u) => u.email));
   }, []);

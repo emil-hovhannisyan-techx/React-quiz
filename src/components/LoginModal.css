@@ -1,49 +1,49 @@
 .login-modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  align-items: center;
   background: rgba(30, 30, 30, 0.45);
   display: flex;
-  align-items: center;
+  height: 100vh;
   justify-content: center;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100vw;
   z-index: 9999;
 }
 
 .login-modal {
+  align-items: stretch;
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 32px rgba(0, 0, 0, 0.12);
-  padding: 32px 28px 24px 28px;
-  min-width: 340px;
-  max-width: 90vw;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
+  max-width: 90vw;
+  min-width: 340px;
+  padding: 32px 28px 24px 28px;
   position: relative;
 }
 
 .login-close {
-  position: absolute;
-  top: 16px;
-  right: 18px;
   background: none;
   border: none;
-  font-size: 1.5rem;
   color: #888;
   cursor: pointer;
+  font-size: 1.5rem;
+  position: absolute;
+  right: 18px;
+  top: 16px;
 }
 
 .login-title {
+  color: #222;
   font-size: 1.3rem;
   font-weight: 700;
   margin-bottom: 8px;
-  color: #222;
 }
 .login-desc {
-  font-size: 0.98rem;
   color: #666;
+  font-size: 0.98rem;
   margin-bottom: 18px;
 }
 .login-form {
@@ -53,17 +53,17 @@
   margin-bottom: 12px;
 }
 .login-form label {
-  font-size: 0.98rem;
   color: #222;
+  font-size: 0.98rem;
   margin-bottom: 2px;
 }
 .login-form input {
-  padding: 8px 10px;
   border: 1px solid #bfc7d1;
   border-radius: 6px;
   font-size: 1rem;
-  outline: none;
   margin-bottom: 2px;
+  outline: none;
+  padding: 8px 10px;
 }
 .login-form input:focus {
   border-color: #5b7cff;
@@ -75,30 +75,30 @@
 }
 .login-submit {
   background: #5b7cff;
-  color: #fff;
   border: none;
   border-radius: 8px;
-  padding: 10px 0;
+  color: #fff;
+  cursor: pointer;
   font-size: 1rem;
   font-weight: 600;
-  cursor: pointer;
   margin-top: 8px;
+  padding: 10px 0;
   transition: background 0.2s;
 }
 .login-submit:hover {
   background: #4663c6;
 }
 .login-switch {
-  text-align: center;
-  font-size: 0.97rem;
   color: #666;
+  font-size: 0.97rem;
+  text-align: center;
 }
 .login-switch button {
   background: none;
   border: none;
   color: #5b7cff;
-  font-weight: 600;
   cursor: pointer;
   font-size: 0.97rem;
+  font-weight: 600;
   margin-left: 2px;
 }

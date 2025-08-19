@@ -1,44 +1,94 @@
 .app-header {
-  font-family: "Inter", Arial, sans-serif;
   background: #18181b;
   border-bottom: 1px solid #222;
-  width: 100vw;
-  min-width: 0;
   box-sizing: border-box;
+  font-family: "Inter", Arial, sans-serif;
+  min-width: 0;
   padding: 0;
+  width: 100vw;
 }
 
 .header-wrapper {
-  display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0.75rem 1rem;
   box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 0.75rem 1rem;
+  width: 100%;
 }
 
 .quiz-title {
-  display: flex;
   align-items: center;
-  gap: 0.5rem;
+  color: #fff;
+  display: flex;
   font-size: 1.2rem;
   font-weight: 700;
-  color: #fff;
+  gap: 0.5rem;
 }
 
 .welcome-text {
-  font-size: 1rem;
   color: #fff;
+  font-size: 1rem;
   font-weight: 500;
+}
+
+.logout-btn {
+  align-items: center;
+  background: transparent;
+  border: 1px solid oklch(100% 0 0);
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  color: oklch(100% 0 0);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  gap: 0.25rem;
+  height: 2.25rem;
+  justify-content: center;
+  line-height: calc(1.25 / 0.875);
+  margin-left: 10px;
+  outline: none;
+  padding: 0.5rem 1rem;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+}
+
+.logout-btn:hover {
+  background: oklch(100% 0 0);
+  color: oklch(20.5% 0 0);
+}
+
+.login-btn {
+  align-items: center;
+  background: oklch(100% 0 0);
+  border: 1px solid oklch(100% 0 0);
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  color: #333;
+  cursor: pointer;
+  display: inline-flex;
+  flex-shrink: 0;
+  font-size: 0.875rem;
+  font-weight: 500;
+  gap: 0.5rem;
+  height: 2.25rem;
+  justify-content: center;
+  line-height: calc(1.25 / 0.875);
+  outline: none;
+  padding: 0.5rem 1rem;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
 }
 
 @media (max-width: 900px) {
   .header-wrapper {
-    padding: 0.5rem 0.5rem;
-    max-width: 100vw;
     gap: 0;
+    max-width: 100vw;
+    padding: 0.5rem 0.5rem;
   }
   .quiz-title {
     font-size: 1rem;
@@ -55,8 +105,8 @@
   }
   .header-wrapper {
     flex-direction: row;
-    padding: 0.5rem 0.25rem;
     max-width: 100vw;
+    padding: 0.5rem 0.25rem;
   }
   .quiz-title {
     font-size: 0.95rem;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Brain, LogOut } from "lucide-react";
+import { Brain } from "lucide-react";
 import LoginModal from "./LoginModal";
 import "./Header.css";
 
@@ -32,9 +32,9 @@ const Header = () => {
         </div>
         {user ? (
           <div className="welcome-text">
-            Welcome, <span className="username">{user.email.split('@')[0]}</span>
+            Welcome,{" "}
+            <span className="username">{user.email.split("@")[0]}</span>
             <button className="logout-btn" onClick={handleLogout}>
-              <LogOut size={18} style={{ marginLeft: 8, marginRight: 4 }} />{" "}
               Logout
             </button>
           </div>

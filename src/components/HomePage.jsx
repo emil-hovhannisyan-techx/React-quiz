@@ -1,8 +1,33 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Brain, Users, Trophy, TrendingUp } from "lucide-react";
+import LoginModal from "./LoginModal";
+import CreateQuiz from "./CreateQuiz";
 import "./HomePage.css";
 
 const HomePage = () => {
+  const [user, setUser] = useState(null);
+  const [showLogin, setShowLogin] = useState(false);
+  const [showCreateQuiz, setShowCreateQuiz] = useState(false);
+
+  useEffect(() => {
+    const savedUser = localStorage.getItem("quizUser");
+    if (savedUser) setUser(JSON.parse(savedUser));
+  }, []);
+
+  const handleLogin = (userData) => {
+    setUser(userData);
+    localStorage.setItem("quizUser", JSON.stringify(userData));
+    setShowLogin(false);
+  };
+
+  const handleCreateQuizClick = () => {
+    if (!user) {
+      setShowLogin(true);
+    } else {
+      setShowCreateQuiz(true);
+    }
+  };
+
   return (
     <div className="homepage-container">
       <div className="homepage-header">
@@ -12,7 +37,12 @@ const HomePage = () => {
           analyze professional quizzes. Built for enterprise-scale learning and
           assessment.
         </p>
-        <button className="homepage-create-quiz">+ Create Quiz</button>
+        <button
+          className="homepage-create-quiz"
+          onClick={handleCreateQuizClick}
+        >
+          + Create Quiz
+        </button>
       </div>
       <div className="homepage-features-section">
         <h2 className="homepage-features-title">Enterprise Features</h2>
@@ -78,6 +108,12 @@ const HomePage = () => {
           <span className="stats-label">Uptime SLA</span>
         </div>
       </div>
+      {showLogin && (
+        <LoginModal onLogin={handleLogin} onClose={() => setShowLogin(false)} />
+      )}
+      {showCreateQuiz && (
+        <CreateQuiz onClose={() => setShowCreateQuiz(false)} />
+      )}
     </div>
   );
 };
