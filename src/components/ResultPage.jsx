@@ -35,32 +35,34 @@ const ResultPage = () => {
                 parts: [
                   {
                     text: `You are a professional quiz generator. 
-Generate a quiz with the following parameters:
+                          Generate a quiz with the following parameters:
 
-Topic: ${quizRequest.topic}
-Language: ${quizRequest.language}
-Number of Questions: ${quizRequest.count}
-Difficulty: ${quizRequest.difficulty}
-Special Requirements: ${quizRequest.requirements || "None"}
+                          Topic: ${quizRequest.topic}
+                          Language: ${quizRequest.language}
+                          Number of Questions: ${quizRequest.count}
+                          Difficulty: ${quizRequest.difficulty}
+                          Special Requirements: ${
+                            quizRequest.requirements || "None"
+                          }
 
-The output MUST strictly follow this JSON schema:
+                          The output MUST strictly follow this JSON schema:
 
-{
-  "quiz": {
-    "topic": "string",
-    "language": "string",
-    "difficulty": "string",
-    "questions": [
-      {
-        "question": "string",
-        "options": ["string", "string", "string", "string"],
-        "correctAnswer": "string",
-        "explanation": "string"
-      }
-    ]
-  }
-}
-Return ONLY valid JSON. Do not include explanations outside of JSON.`,
+                          {
+                            "quiz": {
+                              "topic": "string",
+                              "language": "string",
+                              "difficulty": "string",
+                              "questions": [
+                                {
+                                  "question": "string",
+                                  "options": ["string", "string", "string", "string"],
+                                  "correctAnswer": "string",
+                                  "explanation": "string"
+                                }
+                              ]
+                            }
+                          }
+                          Return ONLY valid JSON. Do not include explanations outside of JSON.`,
                   },
                 ],
               },
