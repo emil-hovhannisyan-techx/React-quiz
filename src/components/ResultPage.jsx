@@ -1,6 +1,6 @@
+import { useLocation } from "react-router-dom";
 import useSWR from "swr";
 
-// fetcher helper function
 const fetcher = async (url, apiKey, body) => {
   const res = await fetch(url, {
     method: "POST",
@@ -12,15 +12,15 @@ const fetcher = async (url, apiKey, body) => {
   });
 
   if (!res.ok) {
-    const error = new Error("Failed to fetch");
-    error.status = res.status;
-    throw error;
+    throw new Error(`Failed: ${res.status}`);
   }
-
   return res.json();
 };
 
-const GeminiApiComponent = ({ quizRequest }) => {
+const ResultPage = () => {
+  const location = useLocation();
+  const quizRequest = location.state?.quizRequest;
+
   const API_URL = import.meta.env.VITE_API_URL;
   const API_KEY = import.meta.env.VITE_API_KEY;
 
@@ -34,14 +34,33 @@ const GeminiApiComponent = ({ quizRequest }) => {
               {
                 parts: [
                   {
-                    text: `Generate a quiz in JSON format with these parameters:
+                    text: `You are a professional quiz generator. 
+Generate a quiz with the following parameters:
+
 Topic: ${quizRequest.topic}
 Language: ${quizRequest.language}
 Number of Questions: ${quizRequest.count}
 Difficulty: ${quizRequest.difficulty}
 Special Requirements: ${quizRequest.requirements || "None"}
 
-Use this JSON schema strictly:`,
+The output MUST strictly follow this JSON schema:
+
+{
+  "quiz": {
+    "topic": "string",
+    "language": "string",
+    "difficulty": "string",
+    "questions": [
+      {
+        "question": "string",
+        "options": ["string", "string", "string", "string"],
+        "correctAnswer": "string",
+        "explanation": "string"
+      }
+    ]
+  }
+}
+Return ONLY valid JSON. Do not include explanations outside of JSON.`,
                   },
                 ],
               },
@@ -87,37 +106,22 @@ Use this JSON schema strictly:`,
 
   return (
     <div>
-      <h1>AI Generated Quiz</h1>
-      {isLoading && <div>Loading...</div>}
-      {error && <div>Error: {error.message}</div>}
+      <h1>Generated Quiz JSON</h1>
+      {isLoading && <p>Loading...</p>}
+      {error && <p style={{ color: "red" }}>Error: {error.message}</p>}
       {data && (
-        <div>
-          <h2>{data.quiz.topic}</h2>
-          <p>
-            {data.quiz.language} | {data.quiz.difficulty}
-          </p>
-          <div>
-            {data.quiz.questions.map((q, idx) => (
-              <div key={idx}>
-                <strong>
-                  Q{idx + 1}: {q.question}
-                </strong>
-                <ul>
-                  {q.options.map((opt, i) => (
-                    <li key={i}>{opt}</li>
-                  ))}
-                </ul>
-                <p>
-                  <em>Answer: {q.correctAnswer}</em>
-                </p>
-                {q.explanation && <p>Explanation: {q.explanation}</p>}
-              </div>
-            ))}
-          </div>
-        </div>
+        <pre
+          style={{
+            whiteSpace: "pre-wrap",
+            background: "#f0f0f0",
+            padding: "1rem",
+          }}
+        >
+          {JSON.stringify(data, null, 2)}
+        </pre>
       )}
     </div>
   );
 };
 
-export default GeminiApiComponent;
+export default ResultPage;

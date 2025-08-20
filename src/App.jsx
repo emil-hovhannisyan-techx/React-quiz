@@ -1,15 +1,33 @@
 import "./App.css";
-import Fetcher from "./components/Fetcher";
 import Header from "./components/Header";
 import HomePage from "./components/HomePage";
-function App() {
-  // return <Fetcher />;
+import ResultPage from "./components/ResultPage";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+
+// Layout keeps Header visible on all pages
+const Layout = () => {
   return (
     <>
       <Header />
-      <HomePage />
+      <Outlet /> {/* renders the current page */}
     </>
   );
+};
+
+// Router definition
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      { index: true, element: <HomePage /> }, // default page "/"
+      { path: "result", element: <ResultPage /> }, // "/result"
+    ],
+  },
+]);
+
+function App() {
+  return <RouterProvider router={router} />;
 }
 
 export default App;

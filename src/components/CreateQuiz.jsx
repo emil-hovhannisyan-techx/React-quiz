@@ -1,13 +1,9 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./CreateQuiz.css";
 
 const LANGUAGES = ["English", "Spanish", "French", "German", "Chinese"];
-const QUESTION_COUNTS = [
-  "5 Questions",
-  "10 Questions",
-  "15 Questions",
-  "20 Questions",
-];
+const QUESTION_COUNTS = [5, 10, 15, 20];
 const DIFFICULTIES = ["Easy", "Medium", "Hard"];
 
 const CreateQuiz = ({ onClose }) => {
@@ -16,10 +12,21 @@ const CreateQuiz = ({ onClose }) => {
   const [count, setCount] = useState(QUESTION_COUNTS[0]);
   const [difficulty, setDifficulty] = useState(DIFFICULTIES[1]);
   const [requirements, setRequirements] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    //  handle quiz creation logic later
+
+    const quizRequest = {
+      topic,
+      language,
+      count,
+      difficulty,
+      requirements,
+    };
+
+    // Navigate to result page with request
+    navigate("/result", { state: { quizRequest } });
     onClose();
   };
 
@@ -58,10 +65,13 @@ const CreateQuiz = ({ onClose }) => {
             </div>
             <div className="createquiz-col">
               <label>Number of Questions</label>
-              <select value={count} onChange={(e) => setCount(e.target.value)}>
+              <select
+                value={count}
+                onChange={(e) => setCount(Number(e.target.value))}
+              >
                 {QUESTION_COUNTS.map((q) => (
                   <option key={q} value={q}>
-                    {q}
+                    {q} Questions
                   </option>
                 ))}
               </select>

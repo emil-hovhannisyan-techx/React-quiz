@@ -43,7 +43,6 @@
   font-weight: 600;
   margin-top: 0;
   padding: 10px 32px;
-  transition: background 0.2s;
 }
 .homepage-create-quiz:hover {
   background: #4663c6;
