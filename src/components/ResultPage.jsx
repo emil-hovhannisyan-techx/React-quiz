@@ -1,5 +1,8 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useSWR from "swr";
+import { useState } from "react";
+import QuizQuestions from "./QuizQuestions";
+import QuizOutput from "./QuizOutput";
 
 const fetcher = async (url, apiKey, body) => {
   const res = await fetch(url, {
@@ -19,6 +22,9 @@ const fetcher = async (url, apiKey, body) => {
 
 const ResultPage = () => {
   const location = useLocation();
+  const [answers, setAnswers] = useState([]);
+  const [submitted, setSubmitted] = useState(false);
+  const navigate = useNavigate();
   const quizRequest = location.state?.quizRequest;
 
   const API_URL = import.meta.env.VITE_API_URL;
@@ -35,92 +41,158 @@ const ResultPage = () => {
                 parts: [
                   {
                     text: `You are a professional quiz generator. 
-                          Generate a quiz with the following parameters:
+                            Generate a quiz with the following parameters:
 
-                          Topic: ${quizRequest.topic}
-                          Language: ${quizRequest.language}
-                          Number of Questions: ${quizRequest.count}
-                          Difficulty: ${quizRequest.difficulty}
-                          Special Requirements: ${
-                            quizRequest.requirements || "None"
-                          }
-
-                          The output MUST strictly follow this JSON schema:
-
-                          {
-                            "quiz": {
-                              "topic": "string",
-                              "language": "string",
-                              "difficulty": "string",
-                              "questions": [
-                                {
-                                  "question": "string",
-                                  "options": ["string", "string", "string", "string"],
-                                  "correctAnswer": "string",
-                                  "explanation": "string"
-                                }
-                              ]
+                            Topic: ${quizRequest.topic}
+                            Language: ${quizRequest.language}
+                            Number of Questions: ${quizRequest.count}
+                            Difficulty: ${quizRequest.difficulty}
+                            Special Requirements: ${
+                              quizRequest.requirements || "None"
                             }
-                          }
-                          Return ONLY valid JSON. Do not include explanations outside of JSON.`,
+
+                            The output MUST strictly follow this JSON schema:
+
+                            {
+                              "quiz": {
+                                "topic": "string",
+                                "language": "string",
+                                "difficulty": "string",
+                                "questions": [
+                                  {
+                                    "question": "string",
+                                    "options": ["string", "string", "string", "string"],
+                                    "correctAnswer": "string",
+                                    "explanation": "string"
+                                  }
+                                ]
+                              }
+                            }
+                            Return ONLY valid JSON. Do not include explanations outside of JSON.`,
                   },
                 ],
               },
             ],
             generationConfig: {
               responseMimeType: "application/json",
-              responseSchema: {
-                type: "object",
-                properties: {
-                  quiz: {
-                    type: "object",
-                    properties: {
-                      topic: { type: "string" },
-                      language: { type: "string" },
-                      difficulty: { type: "string" },
-                      questions: {
-                        type: "array",
-                        items: {
-                          type: "object",
-                          properties: {
-                            question: { type: "string" },
-                            options: {
-                              type: "array",
-                              items: { type: "string" },
-                            },
-                            correctAnswer: { type: "string" },
-                            explanation: { type: "string" },
-                          },
-                          required: ["question", "options", "correctAnswer"],
-                        },
-                      },
-                    },
-                    required: ["topic", "language", "difficulty", "questions"],
-                  },
-                },
-              },
             },
           },
         ]
       : null,
-    ([url, key, body]) => fetcher(url, key, body)
+    ([url, key, body]) => fetcher(url, key, body),
+    {
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+      refreshInterval: 0,
+    }
   );
 
+  // parsing quiz json from response
+  let quizData = null;
+  if (data) {
+    try {
+      const textResponse = data.candidates?.[0]?.content?.parts?.[0]?.text;
+      if (textResponse) {
+        quizData = JSON.parse(textResponse);
+      }
+    } catch (err) {
+      console.error("Failed to parse quiz JSON:", err);
+    }
+  }
+
+  // Handle submit
+  const handleSubmit = (userAnswers) => {
+    setAnswers(userAnswers);
+    setSubmitted(true);
+  };
+
+  // Calculate results
+  let correctCount = 0;
+  if (submitted && quizData) {
+    correctCount = quizData.quiz.questions.reduce((acc, q, idx) => {
+      return acc + (q.options[answers[idx]] === q.correctAnswer ? 1 : 0);
+    }, 0);
+  }
+
   return (
-    <div>
-      <h1>Generated Quiz JSON</h1>
-      {isLoading && <p>Loading...</p>}
-      {error && <p style={{ color: "red" }}>Error: {error.message}</p>}
-      {data && (
-        <pre
+    <div
+      className="resultpage-container"
+      style={{
+        fontFamily: "Inter, Arial, sans-serif",
+        background: "#f7f8fa",
+        minHeight: "100vh",
+        padding: "0 0 48px 0",
+      }}
+    >
+      <div
+        className="resultpage-header"
+        style={{
+          textAlign: "left",
+          margin: "48px auto 24px auto",
+          maxWidth: "700px",
+        }}
+      >
+        <button
           style={{
-            whiteSpace: "pre-wrap",
-            background: "#f0f0f0",
-            padding: "1rem",
+            background: "none",
+            border: "none",
+            color: "#222",
+            fontSize: "1rem",
+            cursor: "pointer",
+            marginBottom: "18px",
           }}
+          onClick={() => navigate("/")}
         >
-          {JSON.stringify(data, null, 2)}
-        </pre>
+          &larr; Back to Home
+        </button>
+        {quizData && quizData.quiz && (
+          <>
+            <h1
+              style={{
+                color: "#18181b",
+                fontSize: "2.1rem",
+                fontWeight: 800,
+                marginBottom: "8px",
+              }}
+            >
+              {quizData.quiz.topic} Assessment
+            </h1>
+            <p
+              style={{
+                color: "#666",
+                fontSize: "1.08rem",
+                marginBottom: "18px",
+              }}
+            >
+              A {quizData.quiz.difficulty.toLowerCase()} level quiz covering{" "}
+              {quizData.quiz.topic} concepts in {quizData.quiz.language}.
+            </p>
+          </>
+        )}
+        {isLoading && (
+          <p style={{ color: "#5b7cff", fontSize: "1.2rem", fontWeight: 600 }}>
+            Loading...
+          </p>
+        )}
+        {error && (
+          <p style={{ color: "#e53e3e", fontSize: "1.1rem", fontWeight: 600 }}>
+            Error: {error.message}
+          </p>
+        )}
+      </div>
+      {quizData && quizData.quiz && !submitted && (
+        <QuizQuestions
+          questions={quizData.quiz.questions}
+          onSubmit={handleSubmit}
+        />
+      )}
+      {quizData && quizData.quiz && submitted && (
+        <QuizOutput
+          correctCount={correctCount}
+          total={quizData.quiz.questions.length}
+          difficulty={quizData.quiz.difficulty}
+          onReview={() => setSubmitted(false)}
+        />
       )}
     </div>
   );

@@ -4,24 +4,22 @@ import HomePage from "./components/HomePage";
 import ResultPage from "./components/ResultPage";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 
-// Layout keeps Header visible on all pages
 const Layout = () => {
   return (
     <>
       <Header />
-      <Outlet /> {/* renders the current page */}
+      <Outlet />
     </>
   );
 };
 
-// Router definition
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
     children: [
-      { index: true, element: <HomePage /> }, // default page "/"
-      { path: "result", element: <ResultPage /> }, // "/result"
+      { index: true, element: <HomePage /> },
+      { path: "result", element: <ResultPage /> },
     ],
   },
 ]);
