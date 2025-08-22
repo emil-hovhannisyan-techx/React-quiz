@@ -69,8 +69,6 @@ const QuizReviewPage = () => {
       <div className="quizreview-questions">
         {quiz.questions.map((q, idx) => {
           const userAnswerIdx = results.answers[idx];
-          const userAnswer = q.options[userAnswerIdx];
-          const isCorrect = userAnswer === q.correctAnswer;
           return (
             <div key={idx} className="quizreview-question-card">
               <div className="quizreview-question-header">
