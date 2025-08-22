@@ -3,6 +3,7 @@ import useSWR from "swr";
 import { useState } from "react";
 import QuizQuestions from "./QuizQuestions";
 import QuizOutput from "./QuizOutput";
+import "./ResultPage.css";
 
 const fetcher = async (url, apiKey, body) => {
   const res = await fetch(url, {
@@ -94,6 +95,25 @@ const ResultPage = () => {
       const textResponse = data.candidates?.[0]?.content?.parts?.[0]?.text;
       if (textResponse) {
         quizData = JSON.parse(textResponse);
+        // Save quiz to localStorage if not already saved
+        if (quizData && quizData.quiz) {
+          const quizzes = JSON.parse(localStorage.getItem("quizzes") || "[]");
+          // Generate a unique ID for the quiz
+          const quizId = `${Date.now()}-${Math.random()
+            .toString(36)
+            .substr(2, 9)}`;
+          quizzes.push({
+            id: quizId,
+            topic: quizData.quiz.topic,
+            language: quizData.quiz.language,
+            difficulty: quizData.quiz.difficulty,
+            created: new Date().toISOString(),
+            questions: quizData.quiz.questions,
+          });
+          localStorage.setItem("quizzes", JSON.stringify(quizzes));
+          // Redirect to passquiz page with quizId
+          navigate(`/passquiz?id=${quizId}`);
+        }
       }
     } catch (err) {
       console.error("Failed to parse quiz JSON:", err);
@@ -115,70 +135,24 @@ const ResultPage = () => {
   }
 
   return (
-    <div
-      className="resultpage-container"
-      style={{
-        fontFamily: "Inter, Arial, sans-serif",
-        background: "#f7f8fa",
-        minHeight: "100vh",
-        padding: "0 0 48px 0",
-      }}
-    >
-      <div
-        className="resultpage-header"
-        style={{
-          textAlign: "left",
-          margin: "48px auto 24px auto",
-          maxWidth: "700px",
-        }}
-      >
-        <button
-          style={{
-            background: "none",
-            border: "none",
-            color: "#222",
-            fontSize: "1rem",
-            cursor: "pointer",
-            marginBottom: "18px",
-          }}
-          onClick={() => navigate("/")}
-        >
+    <div className="resultpage-container">
+      <div className="resultpage-header">
+        <button className="resultpage-back-btn" onClick={() => navigate("/")}>
           &larr; Back to Home
         </button>
         {quizData && quizData.quiz && (
           <>
-            <h1
-              style={{
-                color: "#18181b",
-                fontSize: "2.1rem",
-                fontWeight: 800,
-                marginBottom: "8px",
-              }}
-            >
+            <h1 className="resultpage-title">
               {quizData.quiz.topic} Assessment
             </h1>
-            <p
-              style={{
-                color: "#666",
-                fontSize: "1.08rem",
-                marginBottom: "18px",
-              }}
-            >
+            <p className="resultpage-desc">
               A {quizData.quiz.difficulty.toLowerCase()} level quiz covering{" "}
               {quizData.quiz.topic} concepts in {quizData.quiz.language}.
             </p>
           </>
         )}
-        {isLoading && (
-          <p style={{ color: "#5b7cff", fontSize: "1.2rem", fontWeight: 600 }}>
-            Loading...
-          </p>
-        )}
-        {error && (
-          <p style={{ color: "#e53e3e", fontSize: "1.1rem", fontWeight: 600 }}>
-            Error: {error.message}
-          </p>
-        )}
+        {isLoading && <p className="resultpage-loading">Loading...</p>}
+        {error && <p className="resultpage-error">Error: {error.message}</p>}
       </div>
       {quizData && quizData.quiz && !submitted && (
         <QuizQuestions

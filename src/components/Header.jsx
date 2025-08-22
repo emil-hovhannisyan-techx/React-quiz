@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Brain } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import LoginModal from "./LoginModal";
 import "./Header.css";
 
 const Header = () => {
   const [user, setUser] = useState(null);
   const [showLogin, setShowLogin] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const savedUser = localStorage.getItem("quizUser");
@@ -34,6 +36,9 @@ const Header = () => {
           <div className="welcome-text">
             Welcome,{" "}
             <span className="username">{user.email.split("@")[0]}</span>
+            <button className="browse-btn" onClick={() => navigate("/quizzes")}>
+              Browse Quizzes
+            </button>
             <button className="logout-btn" onClick={handleLogout}>
               Logout
             </button>

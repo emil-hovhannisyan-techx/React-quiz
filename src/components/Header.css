@@ -1,3 +1,18 @@
+/* Browse Quizzes button */
+.browse-btn {
+  margin-left: 18px;
+  background: #5b7cff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 7px 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.browse-btn:hover {
+  background: #3a5bff;
+}
 .app-header {
   background: #18181b;
   border-bottom: 1px solid #222;

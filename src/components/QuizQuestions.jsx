@@ -25,9 +25,25 @@ const QuizQuestions = ({ questions, onSubmit }) => {
     onSubmit(answers);
   };
 
+  // Progress percentage
+  const pct = Math.round(((current + 1) / questions.length) * 100);
+
   return (
     <div className="quizquestions-container">
       <div className="quizquestions-card">
+        {/* Progress Meta */}
+        <div className="qr-meta">
+          <div className="qr-count">
+            Question {current + 1} of {questions.length}
+          </div>
+          <div className="qr-progress">
+            <div
+              className="qr-progress-bar"
+              style={{ width: `${pct}%`, background: "#18181b" }}
+            />
+          </div>
+          <div className="qr-progress-text">{pct}% Complete</div>
+        </div>
         <h2 className="quizquestions-title">
           {questions[current].question} (Question {current + 1})
         </h2>
