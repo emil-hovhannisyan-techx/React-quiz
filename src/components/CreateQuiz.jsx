@@ -2,7 +2,15 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./CreateQuiz.css";
 
-const LANGUAGES = ["English", "Spanish", "French", "German", "Chinese"];
+const LANGUAGES = [
+  "English",
+  "Russian",
+  "Armenian",
+  "Spanish",
+  "French",
+  "German",
+  "Chinese",
+];
 const QUESTION_COUNTS = [5, 10, 15, 20];
 const DIFFICULTIES = ["Easy", "Medium", "Hard"];
 
