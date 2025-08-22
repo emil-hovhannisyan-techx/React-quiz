@@ -62,6 +62,7 @@ const LoginModal = ({ onLogin, onClose }) => {
             autoFocus
             required
             list="email-suggestions"
+            autoComplete="email"
           />
           <datalist id="email-suggestions">
             {suggestions.map((s) => (
@@ -73,6 +74,7 @@ const LoginModal = ({ onLogin, onClose }) => {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            autoComplete="current-password"
             required
           />
           {error && <div className="login-error">{error}</div>}

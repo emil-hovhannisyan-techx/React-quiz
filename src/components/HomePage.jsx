@@ -1,22 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Brain, Users, Trophy, TrendingUp } from "lucide-react";
 import LoginModal from "./LoginModal";
 import CreateQuiz from "./CreateQuiz";
+import useUser from "../context/useUser";
 import "./HomePage.css";
 
 const HomePage = () => {
-  const [user, setUser] = useState(null);
+  const { user, login } = useUser();
   const [showLogin, setShowLogin] = useState(false);
   const [showCreateQuiz, setShowCreateQuiz] = useState(false);
 
-  useEffect(() => {
-    const savedUser = localStorage.getItem("quizUser");
-    if (savedUser) setUser(JSON.parse(savedUser));
-  }, []);
-
   const handleLogin = (userData) => {
-    setUser(userData);
-    localStorage.setItem("quizUser", JSON.stringify(userData));
+    login(userData);
     setShowLogin(false);
   };
 

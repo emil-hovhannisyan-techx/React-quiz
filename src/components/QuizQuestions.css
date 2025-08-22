@@ -79,7 +79,6 @@
   background: #5b7cff;
   color: #fff;
 }
-/* Meta / Progress */
 .qr-meta {
   display: grid;
   grid-template-columns: 1fr auto;

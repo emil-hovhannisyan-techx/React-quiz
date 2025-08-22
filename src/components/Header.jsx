@@ -1,28 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Brain } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import LoginModal from "./LoginModal";
+import useUser from "../context/useUser";
 import "./Header.css";
 
 const Header = () => {
-  const [user, setUser] = useState(null);
+  const { user, login, logout } = useUser();
   const [showLogin, setShowLogin] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const savedUser = localStorage.getItem("quizUser");
-    if (savedUser) setUser(JSON.parse(savedUser));
-  }, []);
-
   const handleLogin = (userData) => {
-    setUser(userData);
-    localStorage.setItem("quizUser", JSON.stringify(userData));
+    login(userData);
     setShowLogin(false);
-  };
-
-  const handleLogout = () => {
-    setUser(null);
-    localStorage.removeItem("quizUser");
   };
 
   return (
@@ -39,7 +29,7 @@ const Header = () => {
             <button className="browse-btn" onClick={() => navigate("/quizzes")}>
               Browse Quizzes
             </button>
-            <button className="logout-btn" onClick={handleLogout}>
+            <button className="logout-btn" onClick={logout}>
               Logout
             </button>
           </div>

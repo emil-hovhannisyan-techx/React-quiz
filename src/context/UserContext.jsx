@@ -1,23 +1,25 @@
 import React, { createContext, useState, useEffect } from "react";
-import { getCurrentUser, setCurrentUser, removeCurrentUser } from "../utils";
 
 const UserContext = createContext();
+
+export default UserContext;
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    setUser(getCurrentUser());
+    const savedUser = localStorage.getItem("quizUser");
+    if (savedUser) setUser(JSON.parse(savedUser));
   }, []);
 
   const login = (userData) => {
     setUser(userData);
-    setCurrentUser(userData);
+    localStorage.setItem("quizUser", JSON.stringify(userData));
   };
 
   const logout = () => {
     setUser(null);
-    removeCurrentUser();
+    localStorage.removeItem("quizUser");
   };
 
   return (
@@ -26,5 +28,3 @@ export const UserProvider = ({ children }) => {
     </UserContext.Provider>
   );
 };
-
-export default UserContext;

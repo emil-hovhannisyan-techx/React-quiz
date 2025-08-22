@@ -7,7 +7,7 @@ import QuizListPage from "./components/QuizListPage";
 import QuizReviewPage from "./components/QuizReviewPage";
 import NotFoundPage from "./components/NotFoundPage";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import { UserProvider } from "./context/UserContext";
+import { UserProvider } from "./context/UserContext.jsx";
 
 const Layout = () => {
   return (
