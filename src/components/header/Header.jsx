@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Brain } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import LoginModal from "./LoginModal";
-import useUser from "../context/useUser";
+import LoginModal from "../loginmodal/LoginModal";
+import useUser from "../../context/useUser";
 import "./Header.css";
 
 const Header = () => {

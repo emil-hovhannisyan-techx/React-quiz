@@ -1,11 +1,11 @@
 import "./App.css";
-import Header from "./components/Header";
-import HomePage from "./components/HomePage";
-import ResultPage from "./components/ResultPage";
-import PassQuizPage from "./components/PassQuizPage";
-import QuizListPage from "./components/QuizListPage";
-import QuizReviewPage from "./components/QuizReviewPage";
-import NotFoundPage from "./components/NotFoundPage";
+import Header from "./components/header/Header";
+import HomePage from "./components/homepage/HomePage";
+import ResultPage from "./components/resultpage/ResultPage";
+import PassQuizPage from "./components/passquizpage/PassQuizPage";
+import QuizListPage from "./components/quizlistpage/QuizListPage";
+import QuizReviewPage from "./components/quizreviewpage/QuizReviewPage";
+import NotFoundPage from "./components/notfoundpage/NotFoundPage";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import { UserProvider } from "./context/UserContext.jsx";
 

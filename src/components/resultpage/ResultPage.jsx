@@ -1,8 +1,8 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import useSWR from "swr";
 import { useState } from "react";
-import QuizQuestions from "./QuizQuestions";
-import QuizOutput from "./QuizOutput";
+import QuizQuestions from "../quizquestions/QuizQuestions";
+import QuizOutput from "../quizoutput/QuizOutput";
 import "./ResultPage.css";
 
 const fetcher = async (url, apiKey, body) => {

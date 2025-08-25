@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import QuizQuestions from "./QuizQuestions";
-import QuizOutput from "./QuizOutput";
+import QuizQuestions from "../quizquestions/QuizQuestions";
+import QuizOutput from "../quizoutput/QuizOutput";
 import "./PassQuizPage.css";
 
 const PassQuizPage = () => {

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Brain, Users, Trophy, TrendingUp } from "lucide-react";
-import LoginModal from "./LoginModal";
-import CreateQuiz from "./CreateQuiz";
-import useUser from "../context/useUser";
+import LoginModal from "../loginmodal/LoginModal";
+import CreateQuiz from "../createquiz/CreateQuiz";
+import useUser from "../../context/useUser";
 import "./HomePage.css";
 
 const HomePage = () => {

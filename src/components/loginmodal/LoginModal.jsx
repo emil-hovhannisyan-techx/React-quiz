@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./LoginModal.css";
-import { generateId, getUsers, saveUser } from "../utils";
+import { generateId, getUsers, saveUser } from "../../utils";
 
 const LoginModal = ({ onLogin, onClose }) => {
   const [isSignup, setIsSignup] = useState(false);
