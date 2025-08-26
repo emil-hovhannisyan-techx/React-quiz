@@ -48,7 +48,7 @@ const CreateQuiz = ({ onClose }) => {
         <p className="createquiz-desc">
           Configure your AI-generated quiz parameters
         </p>
-        <form className="createquiz-form" onSubmit={handleSubmit}>
+        <form className="createquiz-form" role="form" onSubmit={handleSubmit}>
           <label>Topic</label>
           <input
             type="text"
