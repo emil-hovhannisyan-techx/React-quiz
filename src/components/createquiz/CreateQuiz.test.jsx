@@ -38,27 +38,22 @@ describe("CreateQuiz", () => {
       ...overrides,
     };
 
-    // Topic input - using placeholder since it doesn't have a proper label
     const topicInput = screen.getByPlaceholderText(
       /e.g., JavaScript Fundamentals/i
     );
     fireEvent.change(topicInput, { target: { value: values.topic } });
 
-    // Language select - using display value since it doesn't have a proper label
     const languageSelect = screen.getByDisplayValue("English");
     fireEvent.change(languageSelect, { target: { value: values.language } });
 
-    // Question count select - using display value
     const countSelect = screen.getByDisplayValue("5 Questions");
     fireEvent.change(countSelect, { target: { value: String(values.count) } });
 
-    // Difficulty select - using display value
     const difficultySelect = screen.getByDisplayValue("Medium");
     fireEvent.change(difficultySelect, {
       target: { value: values.difficulty },
     });
 
-    // Requirements textarea - using placeholder
     const requirementsTextarea = screen.getByPlaceholderText(
       /Any specific focus areas/i
     );
@@ -206,7 +201,6 @@ describe("CreateQuiz", () => {
       expect(mockNavigate).not.toHaveBeenCalled();
     });
 
-    // Verify the input is required
     expect(
       screen.getByPlaceholderText(/e.g., JavaScript Fundamentals/i)
     ).toBeRequired();
@@ -216,7 +210,6 @@ describe("CreateQuiz", () => {
     const user = userEvent.setup();
     render(<CreateQuiz onClose={mockOnClose} />);
 
-    // fill required topic
     await user.type(
       screen.getByPlaceholderText(
         /e.g., JavaScript Fundamentals, World History, Biology/i
@@ -224,7 +217,6 @@ describe("CreateQuiz", () => {
       "React Basics"
     );
 
-    // leave optional requirements empty
     await user.click(screen.getByRole("button", { name: /Generate Quiz/i }));
 
     await waitFor(() => {

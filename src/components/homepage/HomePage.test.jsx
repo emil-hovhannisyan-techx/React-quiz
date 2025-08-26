@@ -62,7 +62,6 @@ describe("HomePage", () => {
   it("renders header, description, features, stats, and + Create Quiz button", () => {
     render(<HomePage />);
 
-    // Header
     expect(
       screen.getByText(/Enterprise AI Quiz Platform/i)
     ).toBeInTheDocument();
@@ -73,13 +72,11 @@ describe("HomePage", () => {
       screen.getByRole("button", { name: /\+ Create Quiz/i })
     ).toBeInTheDocument();
 
-    // Feature cards
     expect(screen.getByText(/AI-Powered/i)).toBeInTheDocument();
     expect(screen.getByText(/Multi-Language/i)).toBeInTheDocument();
     expect(screen.getByText(/Performance Analytics/i)).toBeInTheDocument();
     expect(screen.getByText(/Scalable Platform/i)).toBeInTheDocument();
 
-    // Stats
     expect(screen.getByText(/10M\+/i)).toBeInTheDocument();
     expect(screen.getByText(/500K\+/i)).toBeInTheDocument();
     expect(screen.getByText(/99.9%/i)).toBeInTheDocument();
@@ -99,11 +96,9 @@ describe("HomePage", () => {
     render(<HomePage />);
     const user = userEvent.setup();
 
-    // Open modal
     await user.click(screen.getByRole("button", { name: /\+ Create Quiz/i }));
     expect(screen.getByTestId("login-modal")).toBeInTheDocument();
 
-    // Close modal
     await user.click(screen.getByText("Close Modal"));
     expect(screen.queryByTestId("login-modal")).not.toBeInTheDocument();
   });
@@ -113,7 +108,6 @@ describe("HomePage", () => {
     render(<HomePage />);
     const user = userEvent.setup();
 
-    // Open modal and login
     await user.click(screen.getByRole("button", { name: /\+ Create Quiz/i }));
     await user.click(screen.getByText("Mock Login"));
 
@@ -139,41 +133,32 @@ describe("HomePage", () => {
     render(<HomePage />);
     const user = userEvent.setup();
 
-    // Open modal
     await user.click(screen.getByRole("button", { name: /\+ Create Quiz/i }));
     expect(screen.getByTestId("create-quiz-modal")).toBeInTheDocument();
 
-    // Close modal
     await user.click(screen.getByText("Close Quiz Modal"));
     expect(screen.queryByTestId("create-quiz-modal")).not.toBeInTheDocument();
   });
 
   // Test 7: Complete flow from logged out to creating quiz after login
   it("opens CreateQuiz modal after login (logged out -> login)", async () => {
-    // First render - user is logged out
     const { rerender } = render(<HomePage />);
     const user = userEvent.setup();
 
-    // Click + Create Quiz (logged out)
     await user.click(screen.getByRole("button", { name: /\+ Create Quiz/i }));
     expect(screen.getByTestId("login-modal")).toBeInTheDocument();
 
-    // Click login inside modal
     await user.click(screen.getByText("Mock Login"));
 
-    // Verify login was called
     expect(mockLogin).toHaveBeenCalledWith({
       name: "Test User",
       email: "test@example.com",
     });
 
-    // Update the mock user to simulate login
     mockUser = { name: "Test User", email: "test@example.com" };
 
-    // Re-render the component to reflect the logged-in state
     rerender(<HomePage />);
 
-    // Click create quiz again - now should open create quiz modal
     await user.click(screen.getByRole("button", { name: /\+ Create Quiz/i }));
     expect(screen.getByTestId("create-quiz-modal")).toBeInTheDocument();
   });
@@ -182,8 +167,6 @@ describe("HomePage", () => {
   it("renders all feature icons", () => {
     render(<HomePage />);
 
-    // Since we're using Lucide icons which are mocked, we can't test for them directly
-    // But we can verify that all feature titles are present
     expect(screen.getByText("AI-Powered")).toBeInTheDocument();
     expect(screen.getByText("Multi-Language")).toBeInTheDocument();
     expect(screen.getByText("Performance Analytics")).toBeInTheDocument();
@@ -227,14 +210,11 @@ describe("HomePage", () => {
     render(<HomePage />);
     const user = userEvent.setup();
 
-    // Open login modal
     await user.click(screen.getByRole("button", { name: /\+ Create Quiz/i }));
     expect(screen.getByTestId("login-modal")).toBeInTheDocument();
 
-    // Perform login
     await user.click(screen.getByText("Mock Login"));
 
-    // Login modal should be closed
     expect(screen.queryByTestId("login-modal")).not.toBeInTheDocument();
   });
 });

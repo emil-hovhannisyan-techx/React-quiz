@@ -53,9 +53,10 @@ const LoginModal = ({ onLogin, onClose }) => {
             ? "Create your QuizMaster Pro account"
             : "Access your QuizMaster Pro account"}
         </p>
-        <form className="login-form" onSubmit={handleSubmit}>
-          <label>Email</label>
+        <form className="login-form" onSubmit={handleSubmit} noValidate>
+          <label htmlFor="email">Email</label>
           <input
+            id="email"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -69,8 +70,9 @@ const LoginModal = ({ onLogin, onClose }) => {
               <option key={s} value={s} />
             ))}
           </datalist>
-          <label>Password</label>
+          <label htmlFor="password">Password</label>
           <input
+            id="password"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
