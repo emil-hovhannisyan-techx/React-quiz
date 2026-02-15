@@ -1,0 +1,116 @@
+.quizquestions-container {
+  margin: 0 auto;
+  max-width: 700px;
+}
+.quizquestions-card {
+  background: #fff;
+  border: 1px solid #ececec;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(91, 124, 255, 0.08);
+  margin-bottom: 24px;
+  padding: 32px 32px 24px 32px;
+  transition: box-shadow 0.2s;
+}
+.quizquestions-title {
+  color: #18181b;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+.quizquestions-option {
+  align-items: center;
+  background: #fff;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  box-shadow: none;
+  color: #222;
+  cursor: pointer;
+  display: block;
+  display: flex;
+  font-size: 1.08rem;
+  font-weight: 500;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding: 14px 18px;
+  transition: all 0.2s;
+}
+.quizquestions-option.selected {
+  background: #5b7cff;
+  border: 2px solid #5b7cff;
+  box-shadow: 0 2px 8px rgba(91, 124, 255, 0.08);
+  color: #fff;
+}
+.quizquestions-radio {
+  background: #fff;
+  border: 2px solid #bfc7d1;
+  border-radius: 50%;
+  display: inline-block;
+  height: 22px;
+  margin-right: 10px;
+  width: 22px;
+}
+.quizquestions-option.selected .quizquestions-radio {
+  background: #5b7cff;
+  border: 6px solid #fff;
+}
+.quizquestions-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 32px;
+}
+.quizquestions-btn {
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 10px 24px;
+}
+.quizquestions-btn-light {
+  background: #fff;
+  border: 1px solid #ececec;
+  color: #222;
+}
+.quizquestions-btn-dark {
+  background: #18181b;
+  color: #fff;
+}
+.quizquestions-btn-blue {
+  background: #5b7cff;
+  color: #fff;
+}
+.qr-meta {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
+  gap: 8px 16px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.qr-count {
+  grid-column: 1 / 2;
+}
+
+.qr-progress {
+  grid-column: 1 / 3;
+  height: 10px;
+  background: #f3f4f6;
+  border-radius: 999px;
+  overflow: hidden;
+  position: relative;
+}
+
+.qr-progress-bar {
+  height: 100%;
+  background: #18181b;
+  border-radius: 999px;
+  transition: width 200ms ease;
+}
+
+.qr-progress-text {
+  grid-column: 2 / 3;
+  justify-self: end;
+  font-size: 0.9rem;
+  color: #6b7280;
+}

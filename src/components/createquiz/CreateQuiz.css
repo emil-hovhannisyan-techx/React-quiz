@@ -1,0 +1,125 @@
+.createquiz-modal-overlay {
+  align-items: center;
+  background: rgba(30, 30, 30, 0.45);
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 9999;
+}
+
+.createquiz-modal {
+  align-items: stretch;
+  background: #fff;
+  border: 1px solid #ececec;
+  border-radius: 16px;
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  max-width: 95vw;
+  min-width: 370px;
+  padding: 28px 24px 20px 24px;
+  position: relative;
+}
+
+.createquiz-close {
+  background: none;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  font-size: 1.5rem;
+  position: absolute;
+  right: 18px;
+  top: 16px;
+}
+
+.createquiz-title {
+  color: #222;
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.createquiz-desc {
+  color: #666;
+  font-size: 1rem;
+  margin-bottom: 16px;
+}
+.createquiz-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 0;
+}
+.createquiz-form label {
+  color: #222;
+  font-size: 1rem;
+  margin-bottom: 2px;
+}
+.createquiz-form input {
+  background: #f9f9fb;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-bottom: 2px;
+  outline: none;
+  padding: 8px 12px;
+}
+.createquiz-form input:focus {
+  background: #fff;
+  border-color: #5b7cff;
+}
+.createquiz-form select {
+  background: #f9f9fb;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-bottom: 2px;
+  outline: none;
+  padding: 8px 12px;
+}
+.createquiz-form select:focus {
+  background: #fff;
+  border-color: #5b7cff;
+}
+.createquiz-form textarea {
+  background: #f9f9fb;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-bottom: 2px;
+  outline: none;
+  padding: 8px 12px;
+}
+.createquiz-form textarea:focus {
+  background: #fff;
+  border-color: #5b7cff;
+}
+.createquiz-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 0;
+}
+.createquiz-col {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+.createquiz-submit {
+  background: #5b7cff;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(91, 124, 255, 0.08);
+  color: #fff;
+  cursor: pointer;
+  font-size: 1.08rem;
+  font-weight: 600;
+  margin-top: 12px;
+  padding: 12px 0;
+  transition: background 0.2s;
+}
+.createquiz-submit:hover {
+  background: #4663c6;
+}

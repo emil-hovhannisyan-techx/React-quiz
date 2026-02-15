@@ -1,0 +1,224 @@
+/* QuizReviewPage styles */
+.quizreview-container {
+  font-family: "Inter", Arial, sans-serif;
+  background: #f7f8fa;
+  min-height: 100vh;
+  padding: 0 0 48px 0;
+}
+.quizreview-header-row {
+  max-width: 900px;
+  margin: 0 auto;
+  padding-top: 32px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.quizreview-back {
+  background: none;
+  border: none;
+  color: #222;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 18px;
+}
+.quizreview-badge {
+  display: inline-block;
+  padding: 3px 14px;
+  border-radius: 6px;
+  font-size: 0.98rem;
+  font-weight: 600;
+  background: #f7e9a3;
+  color: #a68c1d;
+  margin-right: 8px;
+}
+.quizreview-badge-easy {
+  background: #e6f7e9;
+  color: #1da65c;
+}
+.quizreview-badge-medium {
+  background: #f7e9a3;
+  color: #a68c1d;
+}
+.quizreview-badge-hard {
+  background: #f7a3a3;
+  color: #a61d1d;
+}
+.quizreview-title {
+  color: #18181b;
+  font-size: 2.3rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+  max-width: 900px;
+  margin: 0 auto 8px auto;
+  padding-top: 12px;
+}
+.quizreview-subtitle {
+  color: #666;
+  font-size: 1.15rem;
+  margin-bottom: 28px;
+  max-width: 900px;
+  margin: 0 auto 28px auto;
+}
+.quizreview-meta-row {
+  display: flex;
+  gap: 48px;
+  max-width: 900px;
+  margin: 0 auto 24px auto;
+  justify-content: flex-start;
+}
+.quizreview-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.quizreview-meta-label {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #222;
+}
+.quizreview-meta-desc {
+  color: #888;
+  font-size: 1rem;
+}
+.quizreview-score {
+  color: #5b7cff;
+}
+.quizreview-questions {
+  max-width: 900px;
+  margin: 0 auto;
+}
+.quizreview-question-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  padding: 28px 32px 22px 32px;
+  margin-bottom: 32px;
+}
+.quizreview-question-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.quizreview-question-number {
+  background: #5b7cff;
+  color: #fff;
+  font-weight: 700;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+}
+.quizreview-question-title {
+  font-size: 1.08rem;
+  font-weight: 600;
+  color: #222;
+}
+.quizreview-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.quizreview-option {
+  background: #f8f8f8;
+  border-radius: 8px;
+  padding: 12px 18px;
+  font-size: 1.05rem;
+  color: #222;
+  margin-bottom: 2px;
+  border: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.quizreview-option-correct {
+  background: #e6fbe6;
+  color: #1da65c;
+  border: 1px solid #b2e6b2;
+}
+.quizreview-option-wrong {
+  background: #fbe6e6;
+  color: #a61d1d;
+  border: 1px solid #e6b2b2;
+}
+.quizreview-icon {
+  font-size: 1.2rem;
+  margin-left: 8px;
+}
+.quizreview-icon-correct {
+  color: #1da65c;
+}
+.quizreview-icon-wrong {
+  color: #a61d1d;
+}
+.quizreview-explanation {
+  background: #eaf1ff;
+  border-radius: 8px;
+  padding: 10px 16px;
+  color: #2563eb;
+  font-size: 1rem;
+  margin-top: 8px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.quizreview-explanation-label {
+  font-weight: 600;
+  margin-right: 6px;
+}
+.quizreview-explanation-text {
+  color: #2563eb;
+}
+.quizreview-performance {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  padding: 28px 32px 22px 32px;
+  margin: 32px auto 0 auto;
+  max-width: 840px;
+  text-align: center;
+}
+.quizreview-performance-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 12px;
+}
+.quizreview-performance-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 8px;
+}
+.quizreview-performance-score {
+  color: #5b7cff;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+.quizreview-performance-correct {
+  color: #1da65c;
+  font-weight: 600;
+}
+.quizreview-performance-wrong {
+  color: #a61d1d;
+  font-weight: 600;
+}
+.quizreview-performance-total {
+  color: #888;
+}
+.quizreview-performance-date {
+  color: #888;
+  font-size: 1rem;
+  margin-top: 8px;
+}
+.quizreview-notfound {
+  text-align: center;
+  color: #888;
+  font-size: 1.1rem;
+  margin-top: 48px;
+}
